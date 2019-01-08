@@ -5,19 +5,24 @@ date: "January 2018"
 output: html_document
 ---
 
-
-### Downloading R and RStudio
-
+# Why R?
+***
+# Downloading R and RStudio
+***
 R versions can be downloaded from the [Comprehensive R Archive Network website](https://cran.r-project.org/). RStudio can be downloaded from the [website](https://www.rstudio.com/products/rstudio/download/).
 
-### RStudio interface
 
-1. Script window
-2. Console
-3. Environment. Where data objects/R objects are stored
-4. Plot/Help/etc window
+# Introduction to R programming language
+## Intro
+Using hashtags (#) to include comments is highly recommended and makes code understandable. Example:
 
-### Use some help
+```{r}
+print("Hello") # This command prints an initial greeting :)
+```
+
+## How to get help!
+Finding help with R
+***
 
 Use `?` to read the help page of functions or data sets. For example:
 
@@ -25,20 +30,14 @@ Use `?` to read the help page of functions or data sets. For example:
 
 Also check [Stack Overflow](https://stackoverflow.com/questions/tagged/r) frequently :)
 
-Using hashtags (#) to include comments is highly recommended and makes code understandable. Example:
+## Object names
 
-```{r}
-print("Hello") # This command prints an initial greeting :)
-```
+* Case sensitive
+* With letters, numbers, "." and "_". They should start with a letter.
+* Avoid using function or operator names: `function`, `if`, `c`...
+* Assign objects to names using `<-` (equivalent to `=`). The typing shortcut is `Cntr + -`.
 
-### Working directories
-
-```{r}
-#setwd("C:/Users/dbenito/Documents/") # Set the working directory
-#getwd() # Prints the directory we're working at.
-```
-
-### Data objects
+## Data objects
 
 * Vectors
 * Factors. For qualitative data.
@@ -72,7 +71,7 @@ my.data.org <- data.frame(x, y, z, row.names = b)
 my.data.org
 ```
 
-### Attributes of the objects and their functions
+## Attributes of the objects and their functions
 
 * Attributes `attributes`
 * Mode `mode`
@@ -91,14 +90,7 @@ dimnames(my.data)
 # etc
 ```
 
-### Object names
-
-* Case sensitive
-* With letters, numbers, "." and "_". They should start with a letter.
-* Avoid using function or operator names: `function`, `if`, `c`...
-* Assign objects to names using `<-` (equivalent to `=`). The typing shortcut is `Cntr + -`.
-
-### Basic maths and statistics in R
+## Basic maths and statistics in R
 
 * `+`, `-`, `*` and `/`
 * `^` and `sqrt`
@@ -131,7 +123,9 @@ if(min(x)>1 || min(y)<10) {
 }
 ```
 
-### Vectors: generate sequences and select values
+## Subsetting 
+
+Vectors: generate sequences and select values
 
 With the function `c()` we can generate strings of values. With the coordinates (using square brackets `[]`) we can select specific elements from strings. With the symbol `$` we can access columns in a data frame by the variable name.
 
@@ -188,6 +182,109 @@ sample(x, prob=(x/sum(x)))
     * Student $t$ distribution `rt`
     * Poisson distribution `rpois`
     * $\chi ^2$ distribution `rchisq`
+
+
+R keeps an index of any of the elements in the different data structures and we can use subsetting to select or exclude any of these elements. [Here](http://www.statmethods.net/management/subset.html) and [here](http://adv-r.had.co.nz/Subsetting.html) you can find very good explanations about subsetting the different data structures using the subsetting operators **[**, **$** or **[[**.
+
+<br />
+
+For the most simple data structures, *vectors*, we can use the operator **[** to get the elements by their position or index. Positions in R starts at 1. For example let's get the second element of *v_character*: 
+
+```{r}
+v_character
+v_character[2]
+```
+
+Or the second and third:
+
+```{r}
+v_character[2:3]
+```
+
+In the case we don't specify anything we will get the original vector:
+
+```{r}
+v_character[]
+```
+
+<br />
+
+For *lists* we can use the operator **[**, that will return a list or **[[** and **$** that will return the elements of the list. Let's see some examples with the **l_named** we created before:
+
+```{r}
+l_named
+```
+
+Let's get the elements in postion 3 in the list **l_named**:
+
+```{r}
+l_named[3]
+class(l_named)
+```
+
+We can see that the returned oject after subseeting is a list (use **?class** to learn more about it). But if we want to get the elements in position 3 we should use **[[3]]** or as we have a named list we can use **$bool**. Let's see an example:
+
+```{r}
+l_named[[3]]
+l_named$bool
+class(l_named[[3]])
+class(l_named$bool)
+```
+
+Now we are accessing to the elements and *class* is telling us that is a logical vector.
+
+
+# RStudio interface
+***
+1. Script window
+2. Console
+3. Environment. Where data objects/R objects are stored
+4. Plot/Help/etc window
+
+
+# Upload and Exporting
+
+Have a csv for them to upload and manipulate
+
+# Installing Packages
+
+Which packages are currently loaded?
+```{r}
+sessionInfo()
+```
+
+
+# RStudio Projects
+# R markdown and R notebooks
+
+#
+
+For *matrices* and *data frames* are similar than for vectors, but here we have to dimensions and when using the operator **[** we need to specify rows and columns this way **[row, column]**. Let's see some examples with our data frame **df** that has three rows and two columns:
+
+```{r}
+df
+```
+
+Let's get first row:
+
+```{r}
+df[1,]
+```
+
+And second column:
+
+```{r}
+df[,2]
+```
+
+Or the element in the third row and second column:
+
+```{r}
+df[3, 2]
+```
+
+As you can see in the result we get an extra line with **Levels: a b c**. Those are factors, another data type that is very important and useful but we will not cover in this course, but you can learn more about them [here](http://rforpublichealth.blogspot.de/2012/11/data-types-part-3-factors.html)
+
 
 ```{r}
 # To visualise it in a histogram
@@ -302,4 +399,9 @@ To load a saved workspace, use the load button in the Environment window or use 
 ```{r}
 #oad("D:/Workshops/201901_R_workshop/R_workshop.RData")
 ```
+### Working directories
 
+```{r}
+#setwd("C:/Users/dbenito/Documents/") # Set the working directory
+#getwd() # Prints the directory we're working at.
+```
