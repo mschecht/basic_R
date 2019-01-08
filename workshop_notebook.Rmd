@@ -6,7 +6,23 @@ output: html_document
 ---
 
 # Why R?
-***
+
+R is a programming language and free software environment for statistical computing and graphics supported by the R Foundation for Statistical Computing. The R language is widely used among statisticians and data miners for developing statistical software and data analysis. (from [Wikipedia](https://en.wikipedia.org/wiki/R_(programming_language))
+
+Some pros...
+
+* R is free
+* R has a great help system
+* R is multi-platform (Windows, GNU-Linux, MacOSX)
+* R has a lot of pre-installed statistical functions
+* The user can create and apply their own functions in R
+
+Some cons - and our reply to them!
+
+* R has a limited graphical interface - but only when used in the command line!
+* It doesn't have commercial support for users - but we can check forums such as [Stack Overflow](https://stackoverflow.com/questions/tagged/r)!
+* It uses programming language and one has to learn the syntax - but we're here to show you the basics!
+
 # Downloading R and RStudio
 ***
 R versions can be downloaded from the [Comprehensive R Archive Network website](https://cran.r-project.org/). RStudio can be downloaded from the [website](https://www.rstudio.com/products/rstudio/download/).
