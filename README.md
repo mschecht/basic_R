@@ -16,4 +16,4 @@ https://courses.edx.org/courses/UTAustinX/UT.7.01x/3T2014/56c5437b88fa43cf828bff
 
 ## Credits
 
-The contents of the course were adapted from ["Curso básico de R"](http://www.ub.edu/stat/docencia/EADB/Curso%20basico%20de%20R.pdf) by Francesc Carmona and the P2P course by Antonio Fernàndez-Guerra and Pelin Yilmaz
+The contents of the course were adapted from ["Curso básico de R"](http://www.ub.edu/stat/docencia/EADB/Curso%20basico%20de%20R.pdf) by Francesc Carmona and the [P2P course](https://rawgit.com/genomewalker/p2p/master/friday/P2P_r_crash_course.html#32_ggplot2) by Antonio Fernàndez-Guerra and Pelin Yilmaz

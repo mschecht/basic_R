@@ -24,7 +24,7 @@ Some cons - and our reply to them!
 * It uses programming language and one has to learn the syntax - but we're here to show you the basics!
 
 # Downloading R and RStudio
-***
+
 R versions can be downloaded from the [Comprehensive R Archive Network website](https://cran.r-project.org/). RStudio can be downloaded from the [website](https://www.rstudio.com/products/rstudio/download/).
 
 
@@ -272,6 +272,8 @@ sessionInfo()
 
 # RStudio Projects
 # R markdown and R notebooks
+
+Check the [R markdown cheatsheet](https://www.rstudio.com/resources/cheatsheets/).
 
 #
 
