@@ -28,32 +28,54 @@ Some cons - and our reply to them!
 R versions can be downloaded from the [Comprehensive R Archive Network website](https://cran.r-project.org/). RStudio can be downloaded from the [website](https://www.rstudio.com/products/rstudio/download/).
 
 
+# RStudio interface
+
+1. Script window
+2. Console
+3. Environment. Where data objects/R objects are stored
+4. Plot/Help/etc window
+
 # Introduction to R programming language
 ## Intro
-Using hashtags (#) to include comments is highly recommended and makes code understandable. Example:
+
+When writing R code, using hashtags (#) to include comments is highly recommended to make the notes understandable. Example:
 
 ```{r}
 print("Hello") # This command prints an initial greeting :)
 ```
 
-## How to get help!
-Finding help with R
-***
+## How to get help
 
-Use `?` to read the help page of functions or data sets. For example:
+ `?` to read the help page of functions or data sets. For example:
 
 `?R.version`
+
+or 
+
+`help(R.Version)`
+
+The [RStudio cheatsheets](https://www.rstudio.com/resources/cheatsheets/) are a great resource.
 
 Also check [Stack Overflow](https://stackoverflow.com/questions/tagged/r) frequently :)
 
 ## Object names
 
-* Case sensitive
-* With letters, numbers, "." and "_". They should start with a letter.
-* Avoid using function or operator names: `function`, `if`, `c`...
-* Assign objects to names using `<-` (equivalent to `=`). The typing shortcut is `Cntr + -`.
+To assign an object to a name we use `<-` (equivalent to `=`). The typing shortcut is `Cntr + -`. Names...
+
+* ... are case sensitive
+* ... can contain letters, numbers, "." and "_". They should start with a letter.
+* ... should not have function or operator names: `function`, `if`, `c`...
+
+Example:
+
+```{r}
+Greeting <- print("Hello")
+greeting
+```
 
 ## Data objects
+
+There are the following types of objects:
 
 * Vectors
 * Factors. For qualitative data.
@@ -139,11 +161,9 @@ if(min(x)>1 || min(y)<10) {
 }
 ```
 
-## Subsetting 
+## Subsetting strings and arrays
 
-Vectors: generate sequences and select values
-
-With the function `c()` we can generate strings of values. With the coordinates (using square brackets `[]`) we can select specific elements from strings. With the symbol `$` we can access columns in a data frame by the variable name.
+With the function `c()` we can generate strings of values. With the coordinates (square brackets, `[` and `]`) we can select specific elements from strings. With the operator `$` we can access columns in a data frame by the variable name. The double square bracket operator (`[[` and `]]`) is useful for lists.
 
 Examples:
 
@@ -170,7 +190,7 @@ num.data[1:3, c(1,3)]
 num.data.subset <- num.data[,1:2]
 num.data.subset
 
-# You can also create strings of letters
+# You can also select strings of letters
 my.letters <- letters[1:6]
 my.letters
 # Also capital letters.
@@ -250,25 +270,41 @@ class(l_named$bool)
 Now we are accessing to the elements and *class* is telling us that is a logical vector.
 
 
-# RStudio interface
-***
-1. Script window
-2. Console
-3. Environment. Where data objects/R objects are stored
-4. Plot/Help/etc window
-
-
 # Upload and Exporting
 
 Have a csv for them to upload and manipulate
 
 # Installing Packages
 
+A package is file containing some functions designed for a specific task(s). For example, `ggplot2` is very useful to create elegant plots and the package `vegan` is used for ecological analyses.
+
 Which packages are currently loaded?
+
 ```{r}
 sessionInfo()
 ```
 
+To install a package and to activate it in the current workspace we do:
+
+```{r}
+# To install a package (this task can take a while and may ask for additional packages to be installed):
+install.packages("ggplot2")
+
+# To call the package and use its functions in the current session use:
+library(ggplot2) # or:
+require(ggplot2)
+```
+
+Using the [Bioconductor](https://bioconductor.org/) software to install packages is highly recommended:
+
+```{r}
+if (!requireNamespace("BiocManager"))
+    install.packages("BiocManager")   # This command installs BiocManager if it is not already installed. 
+
+BiocManager::install("ggplot2")
+
+require(ggplot2)
+```
 
 # RStudio Projects
 # R markdown and R notebooks
@@ -374,32 +410,6 @@ Alternatively, you can use the following command:
 
 The package `readxl` is designed to deal with `.xlsx` files. One advantage is that it has functions that allow to read files with more than one spreadsheet.
 
-### Packages
-
-A package is file containing some functions designed for a specific task(s). For example, `ggplot2` is very useful to create elegant plots and the package `vegan` is used for ecological analyses.
-
-To install a package and to activate it in the current workspace do as follows:
-
-```
-# To install a package (this task can take a while and may ask for additional packages to be installed):
-install.packages("ggplot2")
-
-# To call the package and use its functions in the current session use:
-library(ggplot2) # or:
-require(ggplot2)
-```
-
-Using the [Bioconductor](https://bioconductor.org/) software to install packages is highly recommended, especaially with the latest R versions:
-
-```{r}
-#if (!requireNamespace("BiocManager"))
-#    install.packages("BiocManager")   # This command installs BiocManager if it's not installed already.
-
-#BiocManager::install("ggplot2")
-
-#require(ggplot2)
-```
-
 ### Saving a workspace
 
 It is highly recommended to save the elements created in the session. This is especially important when the functions/analyses done on the data took a long time.
@@ -415,7 +425,7 @@ A workspace can also be saved upon closing the RStudio session.
 To load a saved workspace, use the load button in the Environment window or use the following command:
 
 ```{r}
-#oad("D:/Workshops/201901_R_workshop/R_workshop.RData")
+#load("D:/Workshops/201901_R_workshop/R_workshop.RData")
 ```
 ### Working directories
 
