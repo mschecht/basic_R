@@ -70,7 +70,7 @@ Example:
 
 ```{r}
 Greeting <- print("Hello")
-greeting
+Greeting
 ```
 
 ## Data objects
@@ -134,7 +134,7 @@ dimnames(my.data)
 * `^` and `sqrt`
 * `exp`, `log`, `log10`, `log2`, `logb(x, base)`
 * `max`, `min`, `range`, `mean`, `median`, `var`, `sd`, `quantile`, `sum`...
-* Logical operators: `<`, `<=`, `>`, `>=`, `==` (*equal to*), `!=` (*not equal to*), `&&` (*and*), `||` (*or*).
+* Logical operators: `<`, `<=`, `>`, `>=`, `==` (*equals*), `!=` (*not equal to*), `&&` (*and*), `||` (*or*).
 * Logical clauses `if() {} else {}`.
 * Set operations: `union(x, y)`, `intersect(x, y)`...
 
@@ -270,9 +270,53 @@ class(l_named$bool)
 Now we are accessing to the elements and *class* is telling us that is a logical vector.
 
 
-# Upload and Exporting
+## Dealing with NAs
 
-Have a csv for them to upload and manipulate
+Identifying and replacing non-available (NA) values in our datasets can be useful:
+
+```{r}
+v <- c(1, 5, 19, 2, 23, NA, 3, 9, NA)
+v
+
+is.na(v)
+which(is.na(v))
+
+# Create a vector without the NAs
+w <- v[!is.na(v)]
+w
+
+# Substitute NAs for e.g. 0
+v2 <- v
+v2[is.na(v2)] <- 0
+v2
+
+# Inf (infinite) and NaN (not a number) are different from NA:
+5/0
+0/0
+is.infinite(5/0)
+is.nan(0/0)
+
+# NAs can be removed in some functions
+mean(v)
+mean(v, na.rm=TRUE)
+```
+
+For linear models (`lm` function) one can use `na.omit` or `na.exclude`. 
+# Upload and Exporting
+## Importing data from Excel
+
+To import a dataset from Excel the best is to save the Excel file as a comma-separated values (`.csv`) or a tab-separated values (`.tsv`) file.
+
+The `.csv` and `.tsv` files can be imported from the tab "Environment" in RStudio: Import Dataset --> From text.
+
+Alternatively, you can use the following command:
+
+```{r}
+# Make sure you're in the working directory where the file is:
+#R_workshop <- read.csv("D:/Workshops/201901_R_workshop/R_workshop.csv", sep=";")
+```
+
+The package `readxl` is designed to deal with `.xlsx` files. One advantage is that it has functions that allow to read files with more than one spreadsheet.
 
 # Installing Packages
 
@@ -307,11 +351,16 @@ require(ggplot2)
 ```
 
 # RStudio Projects
+
+The objects created in a R session are shown in the tab "Environment". These objects will not be available if we close the R session unless we save the workspace (however you're always asked if you want to save the current workspace upon closing R or RStudio).
+
+A good alternative to not deal with this issue is to create a R project:
+
+
 # R markdown and R notebooks
 
 Check the [R markdown cheatsheet](https://www.rstudio.com/resources/cheatsheets/).
 
-#
 
 For *matrices* and *data frames* are similar than for vectors, but here we have to dimensions and when using the operator **[** we need to specify rows and columns this way **[row, column]**. Let's see some examples with our data frame **df** that has three rows and two columns:
 
@@ -347,38 +396,7 @@ hist(rnorm(100, mean=0, sd=1)) # 100 samples of mean=0 and SD=1 from a normal di
 
 Use `dnorm` for density at a value, `pnorm` for distribution function and `qnorm` for quantile function. Same for other distributions.
 
-### The element "not available"
 
-Identifying and replacing NA values in our datasets can be useful:
-
-```{r}
-v <- c(1, 5, 19, 2, 23, NA, 3, 9, NA)
-v
-
-is.na(v)
-which(is.na(v))
-
-# Create a vector without the NAs
-w <- v[!is.na(v)]
-w
-
-# Substitute NAs for e.g. 0
-v2 <- v
-v2[is.na(v2)] <- 0
-v2
-
-# Inf (infinite) and NaN (not a number) are different from NA:
-5/0
-0/0
-is.infinite(5/0)
-is.nan(0/0)
-
-# NAs can be removed in some functions
-mean(v)
-mean(v, na.rm=TRUE)
-```
-
-For linear models (`lm` function) one can use `na.omit` or `na.exclude`. 
 
 ### Ordering & sorting
 
@@ -394,21 +412,6 @@ my.data
 # sort doesn't work for data frames, but works with vectors within a data frame:
 sort(my.data$X1)
 ```
-
-### Importing data from Excel
-
-To import a dataset from Excel the best is to save the Excel file as a comma-separated values (`.csv`) or a tab-separated values (`.tsv`) file.
-
-The `.csv` and `.tsv` files can be imported from the tab "Environment" in RStudio: Import Dataset --> From text.
-
-Alternatively, you can use the following command:
-
-```{r}
-# Make sure you're in the working directory where the file is:
-#R_workshop <- read.csv("D:/Workshops/201901_R_workshop/R_workshop.csv", sep=";")
-```
-
-The package `readxl` is designed to deal with `.xlsx` files. One advantage is that it has functions that allow to read files with more than one spreadsheet.
 
 ### Saving a workspace
 
