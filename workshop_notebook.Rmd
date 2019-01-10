@@ -77,10 +77,11 @@ Greeting
 
 There are the following types of objects:
 
-* Vectors
-* Factors. For qualitative data.
-* Arrays. Vectors organised by rows and columns.
-* Data frames. Like an array but can contain columns of different types. The columns are called *variables*.
+* **Vectors**
+* **Factors**. For qualitative data.
+* **Lists**. Can contain vectors of different types (integer, double, boolean...).
+* **Arrays**. Vectors organised by rows and columns.
+* **Data frames**. Like an array but can contain columns of different types. The columns are called *variables*. A data frame is the most common way of storing data in R.
 
 Some examples:
 
@@ -93,6 +94,13 @@ z <- c(TRUE, TRUE, FALSE, FALSE, TRUE)
 # Factors
 a <- factor(c(1,2,3,4,5))
 b <- factor(c("a", "b", "c", "d", "e"))
+
+# Lists
+l <- list(1:3, "a", c(TRUE, FALSE, TRUE), c(2.3, 5.9))
+l
+# The elements in a list can be named:
+l_named <- list(int = 1:3, char = "a", bool = c(TRUE, FALSE, TRUE), dbl = c(2.3, 5.9))
+l_named
 
 # Array
 num.data <- array(c(x, y, z), dim=c(5,3))
@@ -163,7 +171,9 @@ if(min(x)>1 || min(y)<10) {
 
 ## Subsetting strings and arrays
 
-With the function `c()` we can generate strings of values. With the coordinates (square brackets, `[` and `]`) we can select specific elements from strings. With the operator `$` we can access columns in a data frame by the variable name. The double square bracket operator (`[[` and `]]`) is useful for lists.
+With the function `c()` we can generate strings of values. With the coordinates (square brackets, `[` and `]`) we can select specific elements from **strings**. With the operator `$` we can access columns in a **data frame** by the variable name. For *lists* we can use the operators `[ ]`, that will return a list, or `[[ ]]` that will return the elements of the list
+
+You can find some help on subsetting [here](http://www.statmethods.net/management/subset.html) and [here](http://adv-r.had.co.nz/Subsetting.html)
 
 Examples:
 
@@ -181,6 +191,13 @@ x
 x[2]
 x[c(2,4)]
 x[2:4]
+
+# Select specific elements from a list
+l
+l[[3]]
+l_named
+l_named[[3]]
+l_named$bool # If we give names to the items in a list, we can access them like this.
 
 # Select specific elements from a matrix.
 num.data
@@ -219,56 +236,13 @@ sample(x, prob=(x/sum(x)))
     * Poisson distribution `rpois`
     * $\chi ^2$ distribution `rchisq`
 
-
-R keeps an index of any of the elements in the different data structures and we can use subsetting to select or exclude any of these elements. [Here](http://www.statmethods.net/management/subset.html) and [here](http://adv-r.had.co.nz/Subsetting.html) you can find very good explanations about subsetting the different data structures using the subsetting operators **[**, **$** or **[[**.
-
-<br />
-
-For the most simple data structures, *vectors*, we can use the operator **[** to get the elements by their position or index. Positions in R starts at 1. For example let's get the second element of *v_character*: 
+To visualise it in a histogram:
 
 ```{r}
-v_character
-v_character[2]
+hist(rnorm(100, mean=0, sd=1)) # 100 samples of mean=0 and SD=1 from a normal distribution.
 ```
 
-Or the second and third:
-
-```{r}
-v_character[2:3]
-```
-
-In the case we don't specify anything we will get the original vector:
-
-```{r}
-v_character[]
-```
-
-<br />
-
-For *lists* we can use the operator **[**, that will return a list or **[[** and **$** that will return the elements of the list. Let's see some examples with the **l_named** we created before:
-
-```{r}
-l_named
-```
-
-Let's get the elements in postion 3 in the list **l_named**:
-
-```{r}
-l_named[3]
-class(l_named)
-```
-
-We can see that the returned oject after subseeting is a list (use **?class** to learn more about it). But if we want to get the elements in position 3 we should use **[[3]]** or as we have a named list we can use **$bool**. Let's see an example:
-
-```{r}
-l_named[[3]]
-l_named$bool
-class(l_named[[3]])
-class(l_named$bool)
-```
-
-Now we are accessing to the elements and *class* is telling us that is a logical vector.
-
+Use `dnorm` for density at a value, `pnorm` for distribution function and `qnorm` for quantile function. Same for other distributions. Check the help pages for these functions if you're interested.
 
 ## Dealing with NAs
 
@@ -302,6 +276,31 @@ mean(v, na.rm=TRUE)
 ```
 
 For linear models (`lm` function) one can use `na.omit` or `na.exclude`. 
+## Ordering & sorting
+
+The function `order` orders the items in a data frame. By default it does it in increasing order, but we can specify the opposite with the parameter `order(..., decreasing = TRUE)`. The output of the function is the *position* of the elements in the data frame, not their values.
+
+```{r}
+my.data
+order(my.data) 
+order(my.data, decreasing = TRUE)
+```
+
+`sort` is used to order the elements in a vector:
+
+```{r}
+v2
+sort(v2) # Orders the elements in a vector
+sort(my.letters, decreasing = T)
+```
+
+`sort` doesn't work for data frames, but works with vectors within a data frame (*i.e.*, variables):
+
+```{r}
+my.data
+sort(my.data$X1)
+```
+
 # Upload and Exporting
 ## Importing data from Excel
 
@@ -354,85 +353,16 @@ require(ggplot2)
 
 The objects created in a R session are shown in the tab "Environment". These objects will not be available if we close the R session unless we save the workspace (however you're always asked if you want to save the current workspace upon closing R or RStudio).
 
-A good alternative to not deal with this issue is to create a R project:
-
+A good alternative to not deal with this issue is to create a R project: ....
 
 # R markdown and R notebooks
 
-Check the [R markdown cheatsheet](https://www.rstudio.com/resources/cheatsheets/).
+Check the [R markdown cheatsheet](https://www.rstudio.com/resources/cheatsheets/) for markdown help.
 
+In this section, let's open the file `workshop_notebook.Rmd` in RStudio and check it in parallel to the `workshop_notebook.html` file. We have created a R notebook (written in R markdown) that can be "knitted" to generate the html document.
 
-For *matrices* and *data frames* are similar than for vectors, but here we have to dimensions and when using the operator **[** we need to specify rows and columns this way **[row, column]**. Let's see some examples with our data frame **df** that has three rows and two columns:
+The elements of an R Markdown are:
 
-```{r}
-df
-```
-
-Let's get first row:
-
-```{r}
-df[1,]
-```
-
-And second column:
-
-```{r}
-df[,2]
-```
-
-Or the element in the third row and second column:
-
-```{r}
-df[3, 2]
-```
-
-As you can see in the result we get an extra line with **Levels: a b c**. Those are factors, another data type that is very important and useful but we will not cover in this course, but you can learn more about them [here](http://rforpublichealth.blogspot.de/2012/11/data-types-part-3-factors.html)
-
-
-```{r}
-# To visualise it in a histogram
-hist(rnorm(100, mean=0, sd=1)) # 100 samples of mean=0 and SD=1 from a normal distribution.
-```
-
-Use `dnorm` for density at a value, `pnorm` for distribution function and `qnorm` for quantile function. Same for other distributions.
-
-
-
-### Ordering & sorting
-
-```{r}
-my.data
-order(my.data) # Orders the items in a data frame. By default in increasing order. The output is the position of the elements in the data frame.
-order(my.data, decreasing = TRUE)
-
-v2
-sort(v2) # Orders the elements in a vector
-sort(my.letters, decreasing = T)
-my.data
-# sort doesn't work for data frames, but works with vectors within a data frame:
-sort(my.data$X1)
-```
-
-### Saving a workspace
-
-It is highly recommended to save the elements created in the session. This is especially important when the functions/analyses done on the data took a long time.
-
-You can save a workspace from the Environment window or with the following command:
-
-```{r}
-#save.image("D:/Workshops/201901_R_workshop/R_workshop.RData") # Specify the path where to save the workspace.
-```
-
-A workspace can also be saved upon closing the RStudio session.
-
-To load a saved workspace, use the load button in the Environment window or use the following command:
-
-```{r}
-#load("D:/Workshops/201901_R_workshop/R_workshop.RData")
-```
-### Working directories
-
-```{r}
-#setwd("C:/Users/dbenito/Documents/") # Set the working directory
-#getwd() # Prints the directory we're working at.
-```
+* the header. This is where the title, author, date and output format is specified. Output format can be pdf, html, docx...
+* the main text. It can include sections, bullet points, tables, etc. Sorry to repeat ourselves, but check the [R markdown cheatsheet](https://www.rstudio.com/resources/cheatsheets/) for more information :)
+* code chunks. To insert an R code chunk type `Cntrl`+`Alt`+`I` or go to the `Inset` tab in the script window in RStudio. The chunks work like tiny R scripts and you can also include comments inside using hashtags (#). Apart from R code, you can include chunks for other coding languages.
