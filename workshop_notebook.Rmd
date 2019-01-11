@@ -60,7 +60,7 @@ Also check [Stack Overflow](https://stackoverflow.com/questions/tagged/r) freque
 
 ## Object names
 
-To assign an object to a name we use `<-` (equivalent to `=`). The typing shortcut is `Cntr + -`. Names...
+To assign an object to a name we use `<-` (equivalent to `=`). The typing shortcut is `Cntr` + `-`. Names...
 
 * ... are case sensitive
 * ... can contain letters, numbers, "." and "_". They should start with a letter.
@@ -123,7 +123,7 @@ my.data.org
 * Mode `mode`
 * Type `typeof`
 * Names `names`
-* Dimensions `dim`
+* Dimensions `dim`. Only in two-dimensional data.
 * Names of the dimensions `dimnames`
 * Class `class`
 
@@ -306,13 +306,15 @@ sort(my.data$X1)
 
 To import a dataset from Excel the best is to save the Excel file as a comma-separated values (`.csv`) or a tab-separated values (`.tsv`) file.
 
-The `.csv` and `.tsv` files can be imported from the tab "Environment" in RStudio: Import Dataset --> From text.
+The `.csv` and `.tsv` files can be imported from the tab "Environment" in RStudio:
+
+![Click on `Import Dataset` --> `From text (base)...`.](Import.png)
 
 Alternatively, you can use the following command:
 
-```{r}
+```
 # Make sure you're in the working directory where the file is:
-#R_workshop <- read.csv("D:/Workshops/201901_R_workshop/R_workshop.csv", sep=";")
+R_workshop <- read.csv("R_workshop.csv", sep=";")
 ```
 
 The package `readxl` is designed to deal with `.xlsx` files. One advantage is that it has functions that allow to read files with more than one spreadsheet.
@@ -329,7 +331,7 @@ sessionInfo()
 
 To install a package and to activate it in the current workspace we do:
 
-```{r}
+```
 # To install a package (this task can take a while and may ask for additional packages to be installed):
 install.packages("ggplot2")
 
@@ -340,7 +342,7 @@ require(ggplot2)
 
 Using the [Bioconductor](https://bioconductor.org/) software to install packages is highly recommended:
 
-```{r}
+```
 if (!requireNamespace("BiocManager"))
     install.packages("BiocManager")   # This command installs BiocManager if it is not already installed. 
 
@@ -353,7 +355,13 @@ require(ggplot2)
 
 The objects created in a R session are shown in the tab "Environment". These objects will not be available if we close the R session unless we save the workspace (however you're always asked if you want to save the current workspace upon closing R or RStudio).
 
-A good alternative to not deal with this issue is to create a R project: ....
+A good alternative to not deal with this issue is to create a R project. 
+
+![1. Click on "Create a project".](Rproject.png)
+
+![2. Associate your R project with a directory in your computer ("New Directory" or "Existing Directory"). Alternatively, you can download a repository from a version control platform like GitHub.](Rproject1.png)
+
+![3. Choose a name for your directory. You can also turn the directory into a git repository.](Rproject2.png)
 
 # R markdown and R notebooks
 
