@@ -1,6 +1,6 @@
 # Basic R workshop - README
 
-Welcome! Here are some instructions to get ready for the basic R workshop at the MPI.
+Welcome! Here are some instructions to get ready for the basic R workshop at the Max Planck Institute for Marine Microbiology.
 
 ## Downloading R and RStudio
 
