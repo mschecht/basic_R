@@ -19,3 +19,8 @@ The download and installation should be pretty straight-forward, if you have tro
 ## Credits
 
 The contents of this workshop were adapted from ["Curso básico de R"](http://www.ub.edu/stat/docencia/EADB/Curso%20basico%20de%20R.pdf) by Francesc Carmona and the [P2P course](https://rawgit.com/genomewalker/p2p/master/friday/P2P_r_crash_course.html#32_ggplot2) by Antonio Fernàndez-Guerra and Pelin Yilmaz.
+
+Name | GitHub handle | ORCID
+---|---|---
+David Benito | @dbenitom | [ORCID]()
+Matthew Schechter | @mschecht | [ORCID](https://orcid.org/0000-0002-8435-3203)
