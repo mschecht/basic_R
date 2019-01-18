@@ -22,7 +22,7 @@ The contents of this workshop were adapted from ["Curso básico de R"](http://ww
 
 ## Contacts
 
-Name | GitHub handle | ORCID
+Name | GitHub handle | email
 ---|---|---
-David Benito | @dbenitom | [ORCID]()
-Matthew Schechter | @mschecht | [ORCID](https://orcid.org/0000-0002-8435-3203)
+David Benito | @dbenitom | dbenito@mpi-bremen.de
+[Matthew Schechter](https://orcid.org/0000-0002-8435-3203) | @mschecht | mschecht@mpi-bremen.de
