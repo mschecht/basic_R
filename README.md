@@ -13,8 +13,6 @@ The download and installation should be pretty straight-forward, if you have tro
 1. Go to the [workshop GitHub repository](https://github.com/mschecht/basic_R) (you should already be there if you are reading this ;))
 2. Click on `Clone or download`, then click `Download ZIP`. Save this file somewhere useful on your local computer.
 
-![](https://github.com/mschecht/basic_R/blob/master/imgs/github.PNG)
-
 ![](imgs/github.PNG)
 
 3. Unzip file `basic_R-master`
