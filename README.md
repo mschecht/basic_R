@@ -13,14 +13,14 @@ The download and installation should be pretty straight-forward, if you have tro
 1. Go to the [workshop GitHub repository](https://github.com/mschecht/basic_R) (you should already be there if you are reading this ;))
 2. Click on `Clone or download`, then click `Download ZIP`. Save this file somewhere useful on your local computer.
 
-![](github.png)
+![](https://github.com/mschecht/basic_R/tree/master/imgs/github.png)
 
 3. Unzip file `basic_R-master`
 4. Open the file `workshop_notebook.html` in your browser. This file contains the guide to the workshop. 
 
 ## Credits
 
-The contents of this workshop were adapted from ["Curso básico de R"](http://www.ub.edu/stat/docencia/EADB/Curso%20basico%20de%20R.pdf) by Francesc Carmona, the [P2P course](https://rawgit.com/genomewalker/p2p/master/friday/P2P_r_crash_course.html#32_ggplot2) by Antonio Fernàndez-Guerra and Pelin Yilmaz and [Happy Belly Bioinformatics' R basics](https://astrobiomike.github.io/R/basics).
+The contents of this workshop were adapted from ["Curso básico de R"](http://www.ub.edu/stat/docencia/EADB/Curso%20basico%20de%20R.pdf) by Francesc Carmona, the [P2P course](https://rawgit.com/genomewalker/p2p/master/friday/P2P_r_crash_course.html#32_ggplot2) by Antonio Fernàndez-Guerra and Pelin Yilmaz and [Happy Belly Bioinformatics' R basics](https://astrobiomike.github.io/R/basics) by Michael D. Lee.
 
 ## Contacts
 
