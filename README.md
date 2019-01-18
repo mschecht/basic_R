@@ -15,6 +15,8 @@ The download and installation should be pretty straight-forward, if you have tro
 
 ![](imgs/github.png)
 
+![](https://github.com/mschecht/basic_R/blob/master/imgs/github.PNG)
+
 3. Unzip file `basic_R-master`
 4. Open the file `workshop_notebook.html` in your browser. This file contains the guide to the workshop. 
 
