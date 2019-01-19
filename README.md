@@ -1,6 +1,6 @@
 # Basic R workshop - README
 
-Welcome! Here are some instructions to get ready for the basic R workshop at the MPI.
+Welcome! Here are some instructions to get ready for the basic R workshop at the Max Planck Institute for Marine Microbiology.
 
 ## Downloading R and RStudio
 
@@ -11,11 +11,20 @@ The download and installation should be pretty straight-forward, if you have tro
 ## Getting the workshop "syllabus"
 
 1. Go to the [workshop GitHub repository](https://github.com/mschecht/basic_R) (you should already be there if you are reading this ;))
-2. Click on `Clone or download`, then click `Download ZIP`
-  - Save this file somewhere useful on your local computer
+2. Click on `Clone or download`, then click `Download ZIP`. Save this file somewhere useful on your local computer.
+
+![](imgs/github.PNG)
+
 3. Unzip file `basic_R-master`
 4. Open the file `workshop_notebook.html` in your browser. This file contains the guide to the workshop. 
 
 ## Credits
 
-The contents of this workshop were adapted from ["Curso básico de R"](http://www.ub.edu/stat/docencia/EADB/Curso%20basico%20de%20R.pdf) by Francesc Carmona and the [P2P course](https://rawgit.com/genomewalker/p2p/master/friday/P2P_r_crash_course.html#32_ggplot2) by Antonio Fernàndez-Guerra and Pelin Yilmaz.
+The contents of this workshop were adapted from ["Curso básico de R"](http://www.ub.edu/stat/docencia/EADB/Curso%20basico%20de%20R.pdf) by Francesc Carmona, the [P2P course](https://rawgit.com/genomewalker/p2p/master/friday/P2P_r_crash_course.html#32_ggplot2) by Antonio Fernàndez-Guerra and Pelin Yilmaz and [Happy Belly Bioinformatics' R basics](https://astrobiomike.github.io/R/basics) by Michael D. Lee.
+
+## Contacts
+
+Name | GitHub handle | email
+---|---|---
+David Benito | @dbenitom | dbenito@mpi-bremen.de
+[Matthew Schechter](https://orcid.org/0000-0002-8435-3203) | @mschecht | mschecht@mpi-bremen.de
