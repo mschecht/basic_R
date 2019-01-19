@@ -3,9 +3,12 @@ title: "R workshop"
 author: "David Benito & Matt Schechter"
 date: "January 2018"
 output: html_document
+editor_options: 
+  chunk_output_type: console
 ---
 
 # Why R?
+***
 
 R is a programming language and free software environment for statistical computing and graphics supported by the R Foundation for Statistical Computing. The R language is widely used among statisticians and data miners for developing statistical software and data analysis. (from [Wikipedia](https://en.wikipedia.org/wiki/R_(programming_language))
 
@@ -23,17 +26,41 @@ Some cons - and our reply to them!
 * It doesn't have commercial support for users - but we can check forums such as [Stack Overflow](https://stackoverflow.com/questions/tagged/r)!
 * It uses programming language and one has to learn the syntax - but we're here to show you the basics!
 
+Here are some great open source resources for your references:
+
+- [R for Data Science](https://r4ds.had.co.nz/)
+- [Advanced R](http://adv-r.had.co.nz/)
+- [Fundamentals of Data Visualization](https://serialmentor.com/dataviz/)
+- [blogdown: Creating Websites with R Markdown](https://bookdown.org/yihui/blogdown/)
+
+# General tips for learning R programming
+***
+
+* Google is your friend! All levels of programmers search the web for solutions to coding problems. As you continue to develope your R skills you will also develope an intuition to search for solutions faster.
+* Organize your data, images, scripts, and notebooks into separate directories. You have a lot of worry about... the more organized you are better.
+* Comment your code! Try to consistenly write notes within your code to explain what your are doing and results. If you dont, you WILL forget when you come back to it in the future. "Damn you past self!"
+* Stay positive and have fun :)
+
 # Downloading R and RStudio
+***
 
 R versions can be downloaded from the [Comprehensive R Archive Network website](https://cran.r-project.org/). RStudio can be downloaded from the [website](https://www.rstudio.com/products/rstudio/download/).
 
 
 # RStudio interface
+***
 
-1. Script window
-2. Console
-3. Environment. Where data objects/R objects are stored
-4. Plot/Help/etc window
+### 1. Script window
+![](imgs/1_scripts.png)
+
+### 2. Console
+![](imgs/2_console.png)
+
+### 3. Environment. Where data objects/R objects are stored
+![](imgs/3_environment.png)
+
+### 4. Plot/Help/etc window
+![](imgs/4_files.png)
 
 # Introduction to R programming language
 ## Intro
@@ -58,6 +85,10 @@ The [RStudio cheatsheets](https://www.rstudio.com/resources/cheatsheets/) are a 
 
 Also check [Stack Overflow](https://stackoverflow.com/questions/tagged/r) frequently :)
 
+## RStudio Tour
+
+
+
 ## Object names
 
 To assign an object to a name we use `<-` (equivalent to `=`). The typing shortcut is `Cntr` + `-`. Names...
@@ -69,7 +100,8 @@ To assign an object to a name we use `<-` (equivalent to `=`). The typing shortc
 Example:
 
 ```{r}
-Greeting <- print("Hello")
+Greeting <- "Hello"
+
 Greeting
 ```
 
@@ -168,6 +200,8 @@ if(min(x)>1 || min(y)<10) {
   print("No")
 }
 ```
+
+Add correlation with Andreas microsensor data!
 
 ## Subsetting strings and arrays
 
@@ -308,20 +342,80 @@ To import a dataset from Excel the best is to save the Excel file as a comma-sep
 
 The `.csv` and `.tsv` files can be imported from the tab "Environment" in RStudio:
 
-![Click on `Import Dataset` --> `From text (base)...`.](Import.png)
+![Click on `Import Dataset` --> `From text (base)...`.](imgs/Import.PNG)
 
 Alternatively, you can use the following command:
 
+```{r}
+iris <- read.csv("data/iris.tsv", header = TRUE, sep = "\t")
 ```
-# Make sure you're in the working directory where the file is:
-R_workshop <- read.csv("R_workshop.csv", sep=";")
+
+Check out your data
+```{r}
+head(iris)
+
+tail(iris)
 ```
+
+## Installing Packages
+
+A package is file containing some functions designed for a specific task(s). For example, `ggplot2` is very useful to create elegant plots and the package `vegan` is used for ecological analyses.
 
 The package `readxl` is designed to deal with `.xlsx` files. One advantage is that it has functions that allow to read files with more than one spreadsheet.
 
-# Installing Packages
+# Tidyverse packages
 
-A package is file containing some functions designed for a specific task(s). For example, `ggplot2` is very useful to create elegant plots and the package `vegan` is used for ecological analyses.
+Hadley Wickham proposed four basic principles that any computer interface for data management in R should follow in the tidy [tools manifesto](https://cran.r-project.org/web/packages/tidyverse/vignettes/manifesto.html):
+
+- Reuse existing data structures
+- Compose simple functions with the pipe
+- Embrace functional programming
+- Designed for humans
+
+
+### Select()
+This verb allows you to select columns of your data
+```{r}
+library(dplyr)
+
+iris <- as_tibble(iris)
+
+# Print iris and select "Sepal.Length"
+select(iris, Sepal.Length)
+```
+
+Now let's try the tidyverse way ;)
+
+Notice the `%>%` symbol, this is known as a pipe. You can think of it had "piping" the output of one command into another command. By structuring your code this way, it becomes closer to English!
+
+This code block could be read as, "Print the iris object then select the Sepal.Length column"
+```{r}
+iris %>% select(Sepal.Length)
+```
+
+Let's check out some more Tidyverse verbs
+
+### Filter()
+This verb allows you so subset rows of your data.
+```{r}
+# Print iris and filter for rows where Sepal.Length is greater than 5.4
+iris %>% filter(Sepal.Length > 5.4)
+
+# Print iris and filter for rows where the species is setosa
+iris %>% filter(Species == "setosa")
+```
+
+### Arrange()
+```{r}
+# Print iris and arrange the rows from smalled to longest Sepal.Length
+iris %>% arrange(Sepal.Length)
+
+# How about descending order!?
+iris %>% arrange(desc(Sepal.Length))
+```
+
+
+
 
 Which packages are currently loaded?
 
@@ -352,18 +446,24 @@ require(ggplot2)
 ```
 
 # RStudio Projects
+***
 
 The objects created in a R session are shown in the tab "Environment". These objects will not be available if we close the R session unless we save the workspace (however you're always asked if you want to save the current workspace upon closing R or RStudio).
 
 A good alternative to not deal with this issue is to create a R project. 
 
-![1. Click on "Create a project".](Rproject.png)
+### 1. Click on “Create a project”.
 
-![2. Associate your R project with a directory in your computer ("New Directory" or "Existing Directory"). Alternatively, you can download a repository from a version control platform like GitHub.](Rproject1.png)
+![Click on `Import Dataset` --> `From text (base)...`.](imgs/RProject.PNG)
 
-![3. Choose a name for your directory. You can also turn the directory into a git repository.](Rproject2.png)
+### 2. Associate your R project with a directory in your computer (“New Directory” or “Existing Directory”). Alternatively, you can download a repository from a version control platform like GitHub.
+
+![Click on `Import Dataset` --> `From text (base)...`.](imgs/RProject1.PNG)
+
+### 3. Choose a name for your directory. You can also turn the directory into a git repository.
 
 # R markdown and R notebooks
+***
 
 Check the [R markdown cheatsheet](https://www.rstudio.com/resources/cheatsheets/) for markdown help.
 
@@ -374,3 +474,12 @@ The elements of an R Markdown are:
 * the header. This is where the title, author, date and output format is specified. Output format can be pdf, html, docx...
 * the main text. It can include sections, bullet points, tables, etc. Sorry to repeat ourselves, but check the [R markdown cheatsheet](https://www.rstudio.com/resources/cheatsheets/) for more information :)
 * code chunks. To insert an R code chunk type `Cntrl`+`Alt`+`I` or go to the `Inset` tab in the script window in RStudio. The chunks work like tiny R scripts and you can also include comments inside using hashtags (#). Apart from R code, you can include chunks for other coding languages.
+
+# Credits
+***
+
+Name | GitHub handle | ORCID
+---|---|---
+David Benito | @dbenitom | [ORCID]()
+Matthew Schechter | @mschecht | [ORCID](https://orcid.org/0000-0002-8435-3203)
+
