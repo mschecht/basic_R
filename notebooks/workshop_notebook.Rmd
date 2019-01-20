@@ -69,12 +69,9 @@ R versions can be downloaded from the [Comprehensive R Archive Network website](
 ![](imgs/4_files.png)
 
 # Introduction to R programming language
-<<<<<<< HEAD
 ***
-=======
 
 We are getting into the exciting stuff! Open RStudio and open a new R script. We will write and execute our commands in it.
->>>>>>> 8d00b155a51fb17acea5d77cd78890bd13d55096
 
 ## Intro
 
@@ -363,7 +360,6 @@ head(iris)
 tail(iris)
 ```
 
-<<<<<<< HEAD
 ## Exporting data
 
 
@@ -377,14 +373,10 @@ write.csv(iris_tail, file = "data/iris_tail.csv", quote = FALSE, row.names = FAL
 write.table(iris_tail, file = "data/iris_tail.tsv", sep = "\t", quote = FALSE, row.names = FALSE, col.names = TRUE)
 ```
 
+**YOUR TURN #4** - In the directory "data" there is an Excel file containing a microensor profile that quantified different parameters. Transform it to `.csv` format and import it into R.
 
 # Installing Packages
 ***
-=======
-**YOUR TURN #4** - In the directory "data" there is an Excel file containing a microensor profile that quantified different parameters. Transform it to `.csv` format and import it into R.
-
-## Installing Packages
->>>>>>> 8d00b155a51fb17acea5d77cd78890bd13d55096
 
 A package is file containing some functions designed for a specific task(s). For example, `ggplot2` is very useful to create elegant plots and the package `vegan` is used for ecological analyses.
 
@@ -514,8 +506,6 @@ iris %>% filter(Species == "setosa")
 ```
 
 
-
-
 ### Arrange()
 
 This verb allows you to order your data by value or alphabetically
@@ -543,8 +533,6 @@ planets.tbl %>% arrange(value)
 ```
 
 
-
-
 ### Rename()
 
 This allows you to rename columns in your data frame
@@ -557,10 +545,6 @@ iris_renamed
 ```
 
 
-
-
-
-
 ### Mutate()
 
 This verb allows you to add new columns to your data frame 
@@ -571,8 +555,6 @@ iris %>% mutate(sep_to_ped_ratio = Sepal.Length/Petal.Length)
 ```
 
 
-
-
 ### Summarise
 
 This verb allow you to make summary statistics from your data
@@ -581,7 +563,6 @@ This verb allow you to make summary statistics from your data
 # Cacluate the mean Sepal.Length and how many observations there are
 iris %>% summarise(avg_len = mean(Sepal.Length), n = n())
 ```
-
 
 
 ### Group_by()
@@ -611,7 +592,6 @@ Let's test out our new Tidyverse powers with some practice problems :)
 6. What age was the oldest person to survive the sinking of the titanic?
 
 7. From the iris data set, find the standard deviation of Sepal.Length per species then export the resulting data frame as a .tsv file in the `/data/` directory of the RProject
-
 
 # RStudio Projects
 ***
