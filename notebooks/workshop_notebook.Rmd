@@ -16,21 +16,18 @@ install.packages("tidyverse")
 # Why R?
 ***
 
-R is a programming language and free software environment for statistical computing and graphics supported by the R Foundation for Statistical Computing. The R language is widely used among statisticians and data miners for developing statistical software and data analysis. (from [Wikipedia](https://en.wikipedia.org/wiki/R_(programming_language))
+R is a programming language and free software environment for statistical computing and graphics supported by the R Foundation for Statistical Computing. The R language is widely used among statisticians and data miners for developing statistical software and data analysis. [Wikipedia](https://en.wikipedia.org/wiki/R_(programming_language))
 
-Some pros...
+In summary:
 
 * R is free
 * R has a great help system
 * R is multi-platform (Windows, GNU-Linux, MacOSX)
 * R has a lot of pre-installed statistical functions
 * The user can create and apply their own functions in R
-
-Some cons - and our reply to them!
-
-* R has a limited graphical interface - but only when used in the command line!
-* It doesn't have commercial support for users - but we can check forums such as [Stack Overflow](https://stackoverflow.com/questions/tagged/r)!
-* It uses programming language and one has to learn the syntax - but we're here to show you the basics!
+* R makes data analyses **reproducible**
+* Great online community! (i.e. [Stack Overflow](https://stackoverflow.com/questions/tagged/r), [#rstats](https://twitter.com/search?q=%23rstats&src=typd))
+* Very popular among biologists!
 
 Here are some great open source resources for your references:
 
@@ -106,7 +103,7 @@ To assign an object to a name we use `<-` (equivalent to `=`). The typing shortc
 Example:
 
 ```{r}
-Greeting <- "Hello"
+Greeting <- "Hello world!"
 
 Greeting
 ```
@@ -117,7 +114,7 @@ There are the following types of objects:
 
 * **Vectors**
 * **Factors**. For qualitative data.
-* **Lists**. Can contain vectors of different types (integer, double, boolean...).
+* **Lists**. Can contain vectors of different types (integer, double, Boolean...).
 * **Arrays**. Vectors organised by rows and columns. It can only store data of one type.
 * **Data frames**. Like an array but can contain columns of different types. The columns are called *variables*. A data frame is the most common way of storing data in R.
 
@@ -271,7 +268,7 @@ my.data.org$x
 my.data.org$y
 ```
 
-**YOUR TURN #3** - You've decided you're not friends with one of people in the `friends` data frame. You want to remove his/her information from your dataframe.
+**YOUR TURN #3** - You've decided you're not friends with one of people in the `friends` data frame. You want to remove his/her information from your data frame.
 
 ### Generate random sequences
 
@@ -291,7 +288,7 @@ sample(x, 10, replace=T, prob=(x/sum(x)))
     * Poisson distribution `rpois`
     * $\chi ^2$ distribution `rchisq`
 
-To visualise it in a histogram:
+To visualize it in a histogram:
 
 ```{r}
 rnorm(100, mean=0, sd=1)
@@ -302,7 +299,7 @@ Use `dnorm` for density at a value, `pnorm` for distribution function and `qnorm
 
 ## Dealing with NAs
 
-Identifying and replacing non-available (NA) values in our datasets can be useful:
+Identifying and replacing non-available (NA) values in our data sets can be useful:
 
 ```{r}
 v <- c(1, 5, 19, 2, 23, NA, 3, 9, NA)
@@ -338,9 +335,9 @@ For linear models (`lm` function) one can use `na.omit` or `na.exclude`.
 
 ## Importing data from Excel
 
-To import a dataset from Excel the easiest is to save the Excel file as a comma-separated values (`.csv`) or a tab-separated values (`.tsv`) file.
+To import a data set from Excel the easiest is to save the Excel file as a comma-separated values (`.csv`) or a tab-separated values (`.tsv`) file.
 
-The `.csv` and `.tsv` files can be imported from the tab "Environment" in RStudio:
+The `.csv` and `.tsv` files can be imported from the tab "Environment" in R Studio:
 
 ![Click on `Import Dataset` --> `From text (base)...`.](imgs/Import.PNG)
 
@@ -414,12 +411,12 @@ require(ggplot2)
 # Tidyverse packages
 ***
 
-The Tidyverse packages are a modern set of functions that are based on [the tidy tools manifesto](https://cran.r-project.org/web/packages/tidyverse/vignettes/manifesto.html) by Hadley Wickham. Two of the prinicples in the manifesto that we believe are important for teaching R are:
+The Tidyverse packages are a modern set of functions that are based on [the tidy tools manifesto](https://cran.r-project.org/web/packages/tidyverse/vignettes/manifesto.html) by Hadley Wickham. Two of the principles in the manifesto that we believe are important for teaching R are:
 
 - Compose simple functions with the pipe
 - Designed for humans
 
-We will show you how the Tidyverse tools maintain these priciples later.
+We will show you how the Tidyverse tools maintain these principles later.
 
 There have been some [hot debates](http://varianceexplained.org/r/teach-tidyverse/) about how to teach R to beginners. The point of contention is whether to teach students Base R first or go straight to the Tidyverse packages. David and I believe a balance is really import, so today we will show you both :)
 
@@ -567,7 +564,7 @@ iris %>% summarise(avg_len = mean(Sepal.Length), n = n())
 
 ### Group_by()
 
-This verb allows you to break up your data into groups. In the iris dataset there are multiple species, we many want to calculate statistics about the invidual species and not the whole dataset
+This verb allows you to break up your data into groups. In the iris data set there are multiple species, we many want to calculate statistics about the individual species and not the whole data set
 
 ```{r}
 # Group by species and calculate the mean Sepal.Width
@@ -581,22 +578,22 @@ Let's test out our new Tidyverse powers with some practice problems :)
 
 1. Import the excel file `data/titanic3.xls` and select the `age` column.
 
-2. In the iris dataset what is the average Sepal.Length per species?
+2. In the iris data set what is the average Sepal.Length per species?
 
-3. How many passengers on the titantic were older than 20?
+3. How many passengers on the titanic were older than 20?
 
 4. What is the average age of men and women on the titanic?
 
-5. How many pasengers survived the sinking of the titanic?
+5. How many passengers survived the sinking of the titanic?
 
 6. What age was the oldest person to survive the sinking of the titanic?
 
-7. From the iris data set, find the standard deviation of Sepal.Length per species then export the resulting data frame as a .tsv file in the `/data/` directory of the RProject
+7. From the iris data set, find the standard deviation of Sepal.Length per species then export the resulting data frame as a .tsv file in the `/data/` directory of the R Project
 
 # RStudio Projects
 ***
 
-The objects created in a R session are shown in the tab "Environment". These objects will not be available if we close the R session unless we save the workspace (however you're always asked if you want to save the current workspace upon closing R or RStudio).
+The objects created in a R session are shown in the tab "Environment". These objects will not be available if we close the R session unless we save the work space (however you're always asked if you want to save the current work space upon closing R or R Studio).
 
 A good alternative to not deal with this issue is to create a R project. 
 
@@ -615,13 +612,13 @@ A good alternative to not deal with this issue is to create a R project.
 
 Check the [R markdown cheatsheet](https://www.rstudio.com/resources/cheatsheets/) for markdown help.
 
-In this section, let's open the file `workshop_notebook.Rmd` in RStudio and check it in parallel to the `workshop_notebook.html` file. We have created a R notebook (written in R markdown) that can be "knitted" to generate the html document.
+In this section, let's open the file `workshop_notebook.Rmd` in R Studio and check it in parallel to the `workshop_notebook.html` file. We have created a R notebook (written in R markdown) that can be "knitted" to generate the html document.
 
 The elements of an R Markdown are:
 
 * the header. This is where the title, author, date and output format is specified. Output format can be pdf, html, docx...
 * the main text. It can include sections, bullet points, tables, etc. Sorry to repeat ourselves, but check the [R markdown cheatsheet](https://www.rstudio.com/resources/cheatsheets/) for more information :)
-* code chunks. To insert an R code chunk type `Cntrl`+`Alt`+`I` or go to the `Insert` tab in the script window in RStudio. The chunks work like tiny R scripts and you can also include comments inside using hashtags (#). Apart from R code, you can include chunks for other coding languages.
+* code chunks. To insert an R code chunk type `Cntrl`+`Alt`+`I` or go to the `Insert` tab in the script window in R Studio. The chunks work like tiny R scripts and you can also include comments inside using hash tags (#). Apart from R code, you can include chunks for other coding languages.
 
 ## Credits
 *****
