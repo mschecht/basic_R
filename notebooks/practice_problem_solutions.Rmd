@@ -1,0 +1,59 @@
+---
+title: "Tidyverse Practice Problem Solutions"
+output: html_notebook
+editor_options: 
+  chunk_output_type: console
+---
+
+1. Import the excel file `data/titanic3.xls` and select the `age` column.
+
+```{r}
+# Load the package to read excel files
+library(readxl)
+
+# Upload the data and assign it to an object
+titanic <- read_excel(path = "data/titanic3.xls")
+
+# Select the age column
+titanic$age
+
+# or
+
+titanic %>% select(age)
+```
+
+2. In the iris dataset what is the average Sepal.Length per species?
+
+```{r}
+iris %>% as_tibble() %>% group_by(Species) %>% summarise(Sepal.Length.avg = mean(Sepal.Length))
+```
+
+
+3. How many passengers on the titantic were older than 20?
+
+```{r}
+titanic %>% filter(age > 30) %>% count()
+```
+
+4. What is the average age of men and women on the titanic?
+```{r}
+titanic %>% select(age) %>% drop_na() %>% summarise(mean(age))
+```
+
+5. How many pasengers survived the sinking of the titanic?
+```{r}
+titanic %>% filter(survived == 1) %>% count()
+
+# ...and sadly passed away
+titanic %>% filter(survived == 0) %>% count()
+```
+
+6. What age was the oldest person to survive the sinking of the titanic?
+```{r}
+titanic %>% filter(survived == 1) %>% arrange(desc(age))
+```
+
+7. From the iris data set, find the average Sepal.Length per species then export the resulting data frame as a .tsv file in the `/data/` directory of the RProject
+```{r}
+iris %>% group_by(Species) %>% summarise(Sepal.Length.avg = mean(Sepal.Length))
+```
