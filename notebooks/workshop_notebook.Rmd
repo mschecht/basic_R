@@ -7,6 +7,12 @@ editor_options:
   chunk_output_type: console
 ---
 
+Ok before we start please run the code below to download a few packages for the course :)
+```
+install.packages("tidyverse")
+```
+
+
 # Why R?
 ***
 
@@ -63,6 +69,8 @@ R versions can be downloaded from the [Comprehensive R Archive Network website](
 ![](imgs/4_files.png)
 
 # Introduction to R programming language
+***
+
 ## Intro
 
 When writing R code, using hashtags (#) to include comments is highly recommended to make the notes understandable. Example:
@@ -84,10 +92,6 @@ or
 The [RStudio cheatsheets](https://www.rstudio.com/resources/cheatsheets/) are a great resource.
 
 Also check [Stack Overflow](https://stackoverflow.com/questions/tagged/r) frequently :)
-
-## RStudio Tour
-
-
 
 ## Object names
 
@@ -340,6 +344,8 @@ sort(my.data$X1)
 ```
 
 # Upload and Exporting
+***
+
 ## Importing data from Excel
 
 To import a dataset from Excel the best is to save the Excel file as a comma-separated values (`.csv`) or a tab-separated values (`.tsv`) file.
@@ -355,71 +361,33 @@ iris <- read.csv("data/iris.tsv", header = TRUE, sep = "\t")
 ```
 
 Check out your data
+
 ```{r}
 head(iris)
 
 tail(iris)
 ```
 
-## Installing Packages
+## Exporting data
+
+
+```{r}
+iris_tail <- tail(iris)
+
+# csv
+write.csv(iris_tail, file = "data/iris_tail.csv", quote = FALSE, row.names = FALSE, col.names = TRUE)
+
+# tsv
+write.table(iris_tail, file = "data/iris_tail.tsv", sep = "\t", quote = FALSE, row.names = FALSE, col.names = TRUE)
+```
+
+
+# Installing Packages
+***
 
 A package is file containing some functions designed for a specific task(s). For example, `ggplot2` is very useful to create elegant plots and the package `vegan` is used for ecological analyses.
 
 The package `readxl` is designed to deal with `.xlsx` files. One advantage is that it has functions that allow to read files with more than one spreadsheet.
-
-# Tidyverse packages
-
-Hadley Wickham proposed four basic principles that any computer interface for data management in R should follow in the tidy [tools manifesto](https://cran.r-project.org/web/packages/tidyverse/vignettes/manifesto.html):
-
-- Reuse existing data structures
-- Compose simple functions with the pipe
-- Embrace functional programming
-- Designed for humans
-
-
-### Select()
-This verb allows you to select columns of your data
-```{r}
-library(dplyr)
-
-iris <- as_tibble(iris)
-
-# Print iris and select "Sepal.Length"
-select(iris, Sepal.Length)
-```
-
-Now let's try the tidyverse way ;)
-
-Notice the `%>%` symbol, this is known as a pipe. You can think of it had "piping" the output of one command into another command. By structuring your code this way, it becomes closer to English!
-
-This code block could be read as, "Print the iris object then select the Sepal.Length column"
-```{r}
-iris %>% select(Sepal.Length)
-```
-
-Let's check out some more Tidyverse verbs
-
-### Filter()
-This verb allows you so subset rows of your data.
-```{r}
-# Print iris and filter for rows where Sepal.Length is greater than 5.4
-iris %>% filter(Sepal.Length > 5.4)
-
-# Print iris and filter for rows where the species is setosa
-iris %>% filter(Species == "setosa")
-```
-
-### Arrange()
-```{r}
-# Print iris and arrange the rows from smalled to longest Sepal.Length
-iris %>% arrange(Sepal.Length)
-
-# How about descending order!?
-iris %>% arrange(desc(Sepal.Length))
-```
-
-
-
 
 Which packages are currently loaded?
 
@@ -448,6 +416,201 @@ BiocManager::install("ggplot2")
 
 require(ggplot2)
 ```
+
+
+# Tidyverse packages
+***
+
+The Tidyverse packages are a modern set of functions that are based on [the tidy tools manifesto](https://cran.r-project.org/web/packages/tidyverse/vignettes/manifesto.html) by Hadley Wickham. Two of the prinicples in the manifesto that we believe are important for teaching R are:
+
+- Compose simple functions with the pipe
+- Designed for humans
+
+We will show you how the Tidyverse tools maintain these priciples later.
+
+There have been some [hot debates](http://varianceexplained.org/r/teach-tidyverse/) about how to teach R to beginners. The point of contention is whether to teach students Base R first or go straight to the Tidyverse packages. David and I believe a balance is really import, so today we will show you both :)
+
+Here are the tools we will be using today:
+
+- tibble: better data frames
+- dplyr: a fast, consistent tool for working with data frame like objects
+- readr: to import data from files
+- tidyr: data tidying and rearrangement
+
+To load all these awesome packages at once, run this code
+
+```{r, results="hide"}
+library(tidyverse)
+
+# or you can load individual package
+
+library(dplyr)
+library(readr)
+```
+
+### dplyr
+
+The [dplyr](https://dplyr.tidyverse.org/) package allows you to interact with data frames and tibbles (a task most biologist will be doing). The package is  easy to learn because it is based around using verbs to manipulate your data frames. In fact, dplyr is referred to as, "the grammar of data manipulation." Here are the verbs we will learn about today:
+
+- Select(): return specific columns of a data frame
+- Filter(): extract rows of a data frame that meet specified conditions
+- Arrange(): order data by row (i.e. descending order)
+- Rename(): rename the title of a column
+- Mutate(): add a new column to your data frame
+- Summarise(): return summary statistics for your data frame
+- Group_by(): organizes data into specific groups
+
+Here are some code examples!
+
+
+### Select()
+
+```{r}
+# load the package
+library(dplyr)
+
+# Check out the iris dataset before and after converting it to a tibble!
+head(iris)
+
+iris <- iris %>% as_tibble() # much better :)
+
+# Print iris and select "Sepal.Length"
+iris %>% select(Sepal.Length)
+```
+
+Notice the `%>%` symbol, this is known as a pipe. You can think of it as "piping" the output of one command into another command. By structuring your code this way, it becomes closer to natural language!
+
+The tibble and the `%>%` are two examples of how Tidyverse tools and packages use the principles:
+
+(1) Compos simple functions with the pipe
+(2) Designed for humans
+
+This code block could be read as, "Print the iris object then select the Sepal.Length column"
+```{r}
+iris %>% select(Sepal.Length)
+
+# Try reading Base R to yourself... trust me it won't form a normal sentence ;)
+```
+
+Exercise: Import the excel file `data/titanic3.xls` and select the `age` column.
+
+Let's check out some more dplyr verbs
+
+
+### Filter()
+This verb allows you so subset rows of your data.
+
+```{r}
+# Print iris and filter for rows where Sepal.Length is greater than 5.4
+iris_long_sepels <- iris %>% filter(Sepal.Length > 5.4)
+
+# Print both of these data frames and take notice of the reduction in dimensions
+iris
+iris_long_sepels
+
+# Print iris and filter for rows where the species is setosa
+iris %>% filter(Species == "setosa")
+```
+
+
+
+
+### Arrange()
+
+This verb allows you to order your data by value or alphabetically
+
+```{r}
+# Print iris and arrange the rows from smalled to longest Sepal.Length
+iris %>% arrange(Sepal.Length)
+
+# How about descending order!?
+iris %>% arrange(desc(Sepal.Length))
+
+# You can also order alphabetically, here's an example:
+
+# Make a list of planets
+planets <- c("Mercury", "Venus", "Earth", "Mars", "Jupiter")
+
+# Convert it to a tibble
+planets.tbl <- planets %>% as_tibble()
+
+# check it out
+planets.tbl
+
+# Arrange the names alphabetically
+planets.tbl %>% arrange(value)
+```
+
+
+
+
+### Rename()
+
+This allows you to rename columns in your data frame
+
+```{r}
+iris_renamed <- iris %>% rename(new_name = Sepal.Length)
+
+# Check it out!
+iris_renamed
+```
+
+
+
+
+
+
+### Mutate()
+
+This verb allows you to add new columns to your data frame 
+
+Let's that the ratio between Sepal.Length and Petal.Length is important for your study. You can add a column with this ratio by doing this:
+```{r}
+iris %>% mutate(sep_to_ped_ratio = Sepal.Length/Petal.Length)
+```
+
+
+
+
+### Summarise
+
+This verb allow you to make summary statistics from your data
+
+```{r}
+# Cacluate the mean Sepal.Length and how many observations there are
+iris %>% summarise(avg_len = mean(Sepal.Length), n = n())
+```
+
+
+
+### Group_by()
+
+This verb allows you to break up your data into groups. In the iris dataset there are multiple species, we many want to calculate statistics about the invidual species and not the whole dataset
+
+```{r}
+# Group by species and calculate the mean Sepal.Width
+iris %>% group_by(Species) %>% summarise(avg_sepal_w = mean(Sepal.Width))
+
+# Count how many observations there are per species
+iris %>% group_by(Species) %>% count()
+```
+
+Let's test out our new Tidyverse powers with some practice problems :)
+
+1. Import the excel file `data/titanic3.xls` and select the `age` column.
+
+2. In the iris dataset what is the average Sepal.Length per species?
+
+3. How many passengers on the titantic were older than 20?
+
+4. What is the average age of men and women on the titanic?
+
+5. How many pasengers survived the sinking of the titanic?
+
+6. What age was the oldest person to survive the sinking of the titanic?
+
+7. From the iris data set, find the standard deviation of Sepal.Length per species then export the resulting data frame as a .tsv file in the `/data/` directory of the RProject
+
 
 # RStudio Projects
 ***
