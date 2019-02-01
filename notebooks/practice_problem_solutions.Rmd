@@ -9,6 +9,7 @@ editor_options:
 
 ```{r}
 # Load the package to read excel files
+library(tidyverse)
 library(readxl)
 
 # Upload the data and assign it to an object
