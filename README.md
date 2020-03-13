@@ -27,4 +27,4 @@ The contents of this workshop were adapted from ["Curso básico de R"](http://ww
 Name | GitHub handle | email
 ---|---|---
 David Benito | @dbenitom | dbenito@mpi-bremen.de
-[Matthew Schechter](https://orcid.org/0000-0002-8435-3203) | @mschecht | mschecht@mpi-bremen.de
+[Matthew Schechter](https://orcid.org/0000-0002-8435-3203) | @mschecht | mschechter@uchicago.edu
